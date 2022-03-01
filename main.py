@@ -1,3 +1,4 @@
+import time
 from fastapi import FastAPI
 from pathlib import Path
 from prediction import AIModel
@@ -24,7 +25,14 @@ def onStartup():
     )
 
 
+@app.get('/')
+def activateAppFromSleep():
+    return {"message": "Hey there!"}
+
+
 @app.post('/predictions')
 def multiple_text_predictions(query: MultipleTextQuery):
+    start = time.time()
     results = spamClassifier.predict(query.texts)
+    print(time.time() - start)
     return results

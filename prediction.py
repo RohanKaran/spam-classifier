@@ -1,4 +1,5 @@
 import json
+import time
 from operator import itemgetter
 from pathlib import Path
 from dataclasses import dataclass
@@ -20,10 +21,10 @@ class AIModel:
     metadata = None
 
     def __post_init__(self):
-        print(self.modelPath)
         if self.modelPath.exists():
-
+            start = time.time()
             self.model = load_model(self.modelPath)
+            print(time.time() - start)
         else:
             raise ValueError('Could not load model data')
         #
