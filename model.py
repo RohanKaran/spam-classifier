@@ -4,9 +4,9 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional, List
 
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.text import tokenizer_from_json
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+from keras.models import load_model
+from keras.preprocessing.text import tokenizer_from_json
+from keras.preprocessing.sequence import pad_sequences
 
 
 @dataclass
