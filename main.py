@@ -1,5 +1,6 @@
 import time
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 from prediction import AIModel
 from schema import MultipleTextQuery
