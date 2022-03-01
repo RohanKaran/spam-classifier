@@ -1,8 +1,6 @@
 from fastapi import FastAPI
-
-import pathlib
-
-from model import AIModel
+from pathlib import Path
+from prediction import AIModel
 from schema import MultipleTextQuery
 
 app = FastAPI()
@@ -14,7 +12,7 @@ spamClassifier = None
 def onStartup():
     global spamClassifier
 
-    MODEL_DIR = pathlib.Path("model")
+    MODEL_DIR = Path("model")
     SPAM_HD_PATH = MODEL_DIR / 'spam_model.h5'
     SPAM_TOKENIZER_PATH = MODEL_DIR / 'spam_tokenizer.json'
     SPAM_METADATA_PATH = MODEL_DIR / 'spam_metadata.json'

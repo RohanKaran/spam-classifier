@@ -39,27 +39,15 @@ class AIModel:
             raise ValueError('Could not load metadata')
 
     def getPaddedSequencesFromTexts(self, texts: List[str]):
-        """
-        Convert a list of texts into the corresponding list
-        of (zero-left-padded) integer lists using the tokenizer.
-        """
         sequences = self.tokenizer.texts_to_sequences(texts)
         maxSeqLength = self.metadata['max_seq_length']
         padded = pad_sequences(sequences, maxlen=maxSeqLength)
         return padded
 
     def getLabelName(self, labelIndex):
-        """
-        Convert a numeric index to the corresponding label text
-        for a prediction result.
-        """
         return self.metadata['label_legend_inverted'][str(labelIndex)]
 
     def getTopPrediction(self, predictionDict):
-        """
-        Utility method to extract the top prediction, i.e. that with
-        the highest accuracy ("the category the input belongs to").
-        """
         if len(predictionDict) == 0:
             return None
         else:
@@ -78,25 +66,6 @@ class AIModel:
         return float(fVal) if standardTypes else fVal
 
     def predict(self, texts: List[str], standardTypes=True, echoInput=False):
-        """
-        Classify a list of texts. The output has the format of a list
-            [
-                {
-                    "prediction": {
-                        label1: confidence1,
-                        ...
-                    }
-                  [ "input": input_text, ]
-                    "top": {"label": top_label, "value": top_value}
-                }
-            ]
-        If standardTypes = True (default), care is taken to convert all numbers
-        to ordinary Python types. This is because with numpy numbers one would
-        get an error trying to serialize the output as JSON:
-              "TypeError: Object of type float32 is not JSON serializable"
-        if echoInput = True (default is False), the input text is also
-        passed back.
-        """
         xInput = self.getPaddedSequencesFromTexts(texts)
         predictions = self.model.predict(xInput)
         labeledPredictions = [
@@ -111,7 +80,7 @@ class AIModel:
             {
                 **{
                     'prediction': labeledPrediction,
-                    'top': self.getTopPrediction(labeledPrediction),
+                    'res': self.getTopPrediction(labeledPrediction),
                 },
                 **({'input': inputText} if echoInput else {}),
             }
