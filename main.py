@@ -30,8 +30,8 @@ def activateAppFromSleep():
     return {"message": "Hey there!"}
 
 
-@app.post('/predictions')
-def multiple_text_predictions(query: MultipleTextQuery):
+@app.post('/prediction')
+def prediction(query: MultipleTextQuery):
     start = time.time()
     results = spamClassifier.predict(query.texts)
     print(time.time() - start)
