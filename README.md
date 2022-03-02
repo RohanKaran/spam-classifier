@@ -6,12 +6,10 @@
 # Spam Classifier
 
 ## Demo
-<hr/>
 
 View the live app [here](https://spamham.netlify.app)
 
 ## About
-<hr/>
 
 #### Datasets: 
 [Dataset 1](https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection) and [Dataset 2](https://archive.ics.uci.edu/ml/datasets/YouTube+Spam+Collection) are collected from [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php).
