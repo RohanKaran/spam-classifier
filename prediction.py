@@ -22,9 +22,7 @@ class AIModel:
 
     def __post_init__(self):
         if self.modelPath.exists():
-            start = time.time()
             self.model = load_model(self.modelPath)
-            print(time.time() - start)
         else:
             raise ValueError('Could not load model data')
         #

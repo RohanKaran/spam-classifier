@@ -42,9 +42,12 @@ def activateAppFromSleep():
     return {"message": "Hey there!"}
 
 
+@app.get('/model-details')
+def get_model_details():
+    return spamClassifier.model.to_json()
+
+
 @app.post('/prediction')
 def prediction(query: MultipleTextQuery):
-    start = time.time()
     results = spamClassifier.predict(query.texts)
-    print(time.time() - start)
     return results
