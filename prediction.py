@@ -65,7 +65,7 @@ class AIModel:
 
     def predict(self, texts: List[str], standardTypes=True, echoInput=False):
         xInput = self.getPaddedSequencesFromTexts(texts)
-        predictions = self.model.predict(xInput)
+        predictions = self.model.predict(xInput, batch_size=10)
         labeledPredictions = [
             {
                 self.getLabelName(predIndex): self._convertFloat(standardTypes,
